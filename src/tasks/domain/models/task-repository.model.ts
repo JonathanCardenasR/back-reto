@@ -4,3 +4,5 @@ export interface ITaskRepositoryModel {
 }
 
 export type IcreateTaskRepositoryModel = Omit<ITaskRepositoryModel, 'id'>;
+
+export type IupdateTaskRepositoryModel = Omit<ITaskRepositoryModel, 'id'>;

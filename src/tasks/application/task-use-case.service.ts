@@ -20,4 +20,14 @@ export class TaskUseCaseService implements ITaskUseCaseService {
     await this.taskRepository.createTask(newTask);
     return { message: 'Task created', code: 200 };
   }
+
+  async updateTask(id: number, task: TaskDto): Promise<IResponse> {
+    await this.taskRepository.updateTask(id, task);
+    return { message: 'Task updated', code: 200 };
+  }
+
+  async deleteTask(id: number): Promise<IResponse> {
+    await this.taskRepository.deleteTask(id);
+    return { message: 'Task deleted', code: 200 };
+  }
 }

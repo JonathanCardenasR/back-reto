@@ -26,4 +26,12 @@ export class TaskRepository implements ICrudTaskRepository {
   async createTask(newTask: IcreateTaskRepositoryModel): Promise<void> {
     await this.ormTaskRepository.createTask(newTask);
   }
+
+  async updateTask(id: number, task: ITaskRepositoryModel): Promise<void> {
+    await this.ormTaskRepository.updateTask(id, task);
+  }
+
+  async deleteTask(id: number): Promise<void> {
+    await this.ormTaskRepository.deleteTask(id);
+  }
 }

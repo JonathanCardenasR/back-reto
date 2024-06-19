@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Inject,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import {
   ITaskUseCaseService,
   IResponse,
@@ -21,5 +30,18 @@ export class TaskController {
   @Post()
   createTask(@Body() task: TaskDto): Promise<IResponse> {
     return this._taskService.createTask(task);
+  }
+
+  @Put(':id')
+  updateTask(
+    @Param('id') id: number,
+    @Body() task: TaskDto,
+  ): Promise<IResponse> {
+    return this._taskService.updateTask(id, task);
+  }
+
+  @Delete(':id')
+  deleteTask(@Param('id') id: number): Promise<IResponse> {
+    return this._taskService.deleteTask(id);
   }
 }

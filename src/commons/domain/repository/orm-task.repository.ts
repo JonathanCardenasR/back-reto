@@ -20,4 +20,15 @@ export class OrmTaskRepository
   async createTask(newTask: IGetTaskRepositoryDto): Promise<void> {
     await this.save(newTask);
   }
+
+  async updateTask(id: number, task: IGetTaskRepositoryDto): Promise<void> {
+    const taskToUpdate = await this.findOneBy({ id });
+    if (!taskToUpdate) throw new Error('Task not found');
+    const updatedTask = this.merge(taskToUpdate, task);
+    await this.save(updatedTask);
+  }
+
+  async deleteTask(id: number): Promise<void> {
+    await this.delete(id);
+  }
 }
