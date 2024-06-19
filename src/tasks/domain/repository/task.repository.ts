@@ -20,6 +20,7 @@ export class TaskRepository implements ICrudTaskRepository {
     return allTasks.map((task) => ({
       id: task.id,
       name: task.name,
+      state: task.state,
     }));
   }
 

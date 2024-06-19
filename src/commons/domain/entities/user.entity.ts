@@ -1,7 +1,16 @@
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+
+@Entity({ name: 'user' })
 export class UserEntity {
+  @PrimaryGeneratedColumn('increment')
   id: number;
-  email: string;
+
+  @Column({ unique: true })
+  username: string;
+
+  @Column()
   password: string;
-  createdAt: Date;
-  updatedAt: Date;
+
+  @Column()
+  state: string;
 }

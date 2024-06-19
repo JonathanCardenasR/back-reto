@@ -7,4 +7,7 @@ export class TaskEntity {
 
   @Column()
   name: string;
+
+  @Column()
+  state: boolean;
 }
