@@ -11,6 +11,6 @@ export class UserEntity {
   @Column()
   password: string;
 
-  @Column()
-  state: string;
+  @Column({ default: true })
+  state: string = 'ACTIVE';
 }

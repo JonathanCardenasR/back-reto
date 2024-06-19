@@ -8,6 +8,6 @@ export class TaskEntity {
   @Column()
   name: string;
 
-  @Column()
-  state: boolean;
+  @Column({ default: true })
+  state: boolean = false;
 }
