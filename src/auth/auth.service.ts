@@ -9,7 +9,7 @@ import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt'; // JWT
 import { JwtPayload } from './jwt-payload.interface'; // JWT
-import { AuthCredentialsDto } from './dto/auth-credentials.dto';
+import { AuthCredentialsDto, AuthDto } from './dto/auth-credentials.dto';
 import { User } from './user.entity';
 
 @Injectable()
@@ -43,9 +43,7 @@ export class AuthService {
     }
   }
 
-  async signIn(
-    authcredentialsDto: AuthCredentialsDto,
-  ): Promise<{ accessToken: string }> {
+  async signIn(authcredentialsDto: AuthCredentialsDto): Promise<AuthDto> {
     const { username, password } = authcredentialsDto;
     const user = await this.userRepository.findOne({
       select: ['id', 'username', 'password'],
@@ -57,9 +55,18 @@ export class AuthService {
       // JWT TOKEN FOR SECURE
       const payload: JwtPayload = { username };
       const accessToken = this.jwtService.sign(payload);
-      return { accessToken };
+      return { id: user.id, username: user.username, token: accessToken };
     } else {
       throw new UnauthorizedException('Please check your login credentials.');
+    }
+  }
+
+  async validate(accessToken: string): Promise<any> {
+    try {
+      this.jwtService.verify(accessToken);
+      return { code: 200, message: 'Valid token' };
+    } catch (error) {
+      throw new UnauthorizedException('Invalid token');
     }
   }
 }

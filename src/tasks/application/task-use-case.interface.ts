@@ -1,8 +1,8 @@
 import { TaskDto } from '../infrastructure/dto/task.dto';
 
 export interface ITaskUseCaseService {
-  getAllTasks(): Promise<TaskDto[]>;
-  createTask(newTask: TaskDto): Promise<IResponse>;
+  getAllTasks(userId: number): Promise<TaskDto[]>;
+  createTask(newTask: TaskDto, userId: number): Promise<IResponse>;
   updateTask(id: number, task: TaskDto): Promise<IResponse>;
   deleteTask(id: number): Promise<IResponse>;
 }

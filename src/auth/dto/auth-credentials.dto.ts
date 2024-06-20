@@ -14,3 +14,13 @@ export class AuthCredentialsDto {
   })
   password: string;
 }
+
+export class AuthDto {
+  username: string;
+  id: number;
+  token: string;
+}
+
+export class AuthTokenDto {
+  token: string;
+}

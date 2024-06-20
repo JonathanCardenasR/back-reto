@@ -25,14 +25,17 @@ export class TaskController {
     private readonly _taskService: ITaskUseCaseService,
   ) {}
 
-  @Get()
-  getAllTasks(): Promise<TaskDto[]> {
-    return this._taskService.getAllTasks();
+  @Get('user/:id')
+  getAllTasks(@Param('id') userId: number): Promise<TaskDto[]> {
+    return this._taskService.getAllTasks(userId);
   }
 
-  @Post()
-  createTask(@Body() task: TaskDto): Promise<IResponse> {
-    return this._taskService.createTask(task);
+  @Post('user/:id')
+  createTask(
+    @Body() task: TaskDto,
+    @Param('id') userId: number,
+  ): Promise<IResponse> {
+    return this._taskService.createTask(task, userId);
   }
 
   @Put(':id')

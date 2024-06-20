@@ -13,13 +13,18 @@ export class OrmTaskRepository
     super(TaskEntity, dataSource.createEntityManager());
   }
 
-  async getAllTasks(): Promise<IGetTaskRepositoryDto[]> {
+  async getAllTasks(userId: number): Promise<IGetTaskRepositoryDto[]> {
     return await this.find({
+      where: { userId },
       order: { id: 'ASC' },
     });
   }
 
-  async createTask(newTask: IGetTaskRepositoryDto): Promise<void> {
+  async createTask(
+    newTask: IGetTaskRepositoryDto,
+    userId: number,
+  ): Promise<void> {
+    newTask.userId = userId;
     await this.save(newTask);
   }
 

@@ -11,13 +11,13 @@ export class TaskUseCaseService implements ITaskUseCaseService {
     private readonly taskRepository: ICrudTaskRepository,
   ) {}
 
-  async getAllTasks(): Promise<TaskDto[]> {
-    const tasks = await this.taskRepository.getAllTasks();
+  async getAllTasks(userId: number): Promise<TaskDto[]> {
+    const tasks = await this.taskRepository.getAllTasks(userId);
     return tasks.map((task) => task);
   }
 
-  async createTask(newTask: TaskDto): Promise<IResponse> {
-    await this.taskRepository.createTask(newTask);
+  async createTask(newTask: TaskDto, userId: number): Promise<IResponse> {
+    await this.taskRepository.createTask(newTask, userId);
     return { message: 'Task created', code: 200 };
   }
 

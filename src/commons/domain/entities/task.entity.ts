@@ -10,4 +10,7 @@ export class TaskEntity {
 
   @Column({ default: true })
   state: boolean = false;
+
+  @Column()
+  userId: number;
 }
