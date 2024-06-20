@@ -7,6 +7,7 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import {
   ITaskUseCaseService,
@@ -14,8 +15,10 @@ import {
 } from '../application/task-use-case.interface';
 import { TaskDto } from './dto/task.dto';
 import { TaskUseCaseService } from '../application/task-use-case.service';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('task')
+@UseGuards(AuthGuard())
 export class TaskController {
   constructor(
     @Inject(TaskUseCaseService)

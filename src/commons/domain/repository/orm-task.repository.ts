@@ -14,7 +14,9 @@ export class OrmTaskRepository
   }
 
   async getAllTasks(): Promise<IGetTaskRepositoryDto[]> {
-    return await this.find();
+    return await this.find({
+      order: { id: 'ASC' },
+    });
   }
 
   async createTask(newTask: IGetTaskRepositoryDto): Promise<void> {
